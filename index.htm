@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>One way binding lib -- Demo</title>
+  </head>
+  <body>
+    <code>
+      <p data-bind="pValue">-- no data yet --</p>
+      <p data-bind data-bind-accesskey="p.accesskey"> accesskey attribute </p>
+      <p data-bind data-bind-class="p.class"> class attribute </p>
+      <p data-bind data-bind-contenteditable="p.contenteditable"> contenteditable attribute </p>
+      <p data-bind data-bind-contextmenu="p.contextmenu"> contextmenu attribute </p>
+      <p data-bind data-bind-dir="p.dir"> dir attribute </p>
+      <p data-bind data-bind-draggable="p.draggable"> draggable attribute </p>
+      <p data-bind data-bind-hidden="p.hidden"> hidden attribute </p>
+      <p data-bind data-bind-id="p.id"> id attribute </p>
+      <p data-bind data-bind-lang="p.lang"> lang attribute </p>
+      <p data-bind data-bind-spellcheck="p.spellcheck"> spellcheck attribute </p>
+      <p data-bind data-bind-style="p.style"> style attribute </p>
+      <p data-bind data-bind-title="p.title"> title attribute </p>
+      <p data-bind data-bind-tabindex="p.tabindex"> tabindex attribute </p>
+    </code>
+
+
+    <br/>
+    <br/>
+    <br/>
+    <p>Open up the console and try making some changes to `data`.</p>
+    <div style="font-size: 10px; display: flex; ">
+      <div style="flex-grow: 1; flex-basis: 30%;">
+        <h3>Current State:</h3>
+        <pre id="current-state"></pre>
+      </div>
+      <div style="flex-grow: 1; flex-basis: 30%;">
+        <h3>Last Change</h3>
+        <pre id="last-change"></pre>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="./node_modules/micro-observer/dist/observer.js"></script>
+    <script>
+      let recentChange;
+      let __data = {
+      	array: [1, 2, 3],
+      	string: 'Hello there',
+      	nested: {
+      		array: ['a', 'b', 'c'],
+      		person: {
+      			name: 'Max', age: ' -- confident -- '
+      		}
+      	},
+        pValue: "text in fert p is set",
+        p: {
+          accesskey: "q",
+          class: "class-set-from-data",
+          dir: "ltr",
+          hidden: "false",
+          title: "title set from data",
+          tabindex: 2,
+          id: "id_set_from_data",
+          style: "color: orangeRed"
+        }
+
+      };
+
+      const render = function() {
+      	document.querySelector('#current-state').innerHTML = JSON.stringify(__data, null, 4);
+      	document.querySelector('#last-change').innerHTML = JSON.stringify(recentChange, null, 4);
+      };
+
+      render();
+
+      let _settings = {
+        errorLevel: 1,
+        domDataAttr: 'bind'
+      }
+
+      let data = owb.create(__data, _settings, function(change) {
+      	recentChange = change;
+      	setTimeout(render, 50);
+      	return true;
+      });
+    </script>
+  </body>
+</html>

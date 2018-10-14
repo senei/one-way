@@ -1,0 +1,16 @@
+{
+  "name": "one-way",
+  "version": "0.0.1",
+  "description": "one way binding in modules",
+  "main": "owb.js",
+  "repository": "senei/one-wey",
+  "author": "Senei web <senei.web+git@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+  },
+  "devDependencies": {
+
+  },
+  "dependencies": {
+  }
+}
