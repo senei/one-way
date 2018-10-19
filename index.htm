@@ -22,7 +22,7 @@
       <p data-bind data-bind-tabindex="p.tabindex"> tabindex attribute </p>
     </code>
 
-
+    <h3  data-bind="string" data-bind-title="b.c.d"> -- no data yet --  </h3>
     <br/>
     <br/>
     <br/>
@@ -42,7 +42,7 @@
       let recentChange;
       let __data = {
       	array: [1, 2, 3],
-      	string: 'Hello there',
+      	_string: 'Hello there',
       	nested: {
       		array: ['a', 'b', 'c'],
       		person: {
@@ -59,7 +59,14 @@
           tabindex: 2,
           id: "id_set_from_data",
           style: "color: orangeRed"
+        },
+        string: "Hello",
+        b: {
+          c: {
+            d: "prop"
+          }
         }
+
 
       };
 
@@ -80,6 +87,11 @@
       	setTimeout(render, 50);
       	return true;
       });
+
+      setTimeout(function(){
+        data.string = "Hello STP !!!";
+        data.b.c.d = "Property is now updated";
+      },2000);
     </script>
   </body>
 </html>

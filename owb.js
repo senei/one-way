@@ -41,6 +41,7 @@ if (typeof define === "function" && define.amd) define([], factory);
               //
               if(_value) {
                 if(_name.length > 0) {
+
                   if(elem.attributes[_name])
                     elem.attributes[_name] = _value;
                   else
@@ -67,7 +68,8 @@ if (typeof define === "function" && define.amd) define([], factory);
         let _el = document.querySelectorAll("["+bindings[chenge.path]+"='"+chenge.path+"']");
 
         [].forEach.call(_el, function(elem, i) {
-
+            let _name = bindings[chenge.path].slice( 5 + settings.domDataAttr.length + 1);
+            
             if( bindings[chenge.path] == "data-" + settings.domDataAttr ){
               if(chenge.type == "delete-prop"){
                 elem.innerHTML = "";
@@ -76,11 +78,11 @@ if (typeof define === "function" && define.amd) define([], factory);
               }
             } else {
               if(chenge.type == "delete-prop"){
-                elem.removeAttribute(chenge.property);
+                elem.removeAttribute(_name);
               } else {
-                if( elem.attributes[chenge.property] ) {
-                  elem.attributes[chenge.property].value = chenge.newValue;
-                } else elem.setAttribute(chenge.property, chenge.newValue);
+                if( elem.attributes[_name] ) {
+                  elem.attributes[_name].value = chenge.newValue;
+                } else elem.setAttribute(_name, chenge.newValue);
               }
             }
 
